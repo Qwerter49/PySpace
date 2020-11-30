@@ -6,7 +6,7 @@ class Camera:
 		# Number of additional samples on each axis to average and improve image quality.
 		# NOTE: This will slow down rendering quadratically.
 		# Recommended Range: 1 to 8 (integer)
-		self.params['ANTIALIASING_SAMPLES'] = 1
+		self.params['ANTIALIASING_SAMPLES'] = 2
 
 		# The strength of the ambient occlusion.
 		# Recommended Range: 0.0 to 0.05
@@ -49,7 +49,7 @@ class Camera:
 		# Field of view of the camera in degrees
 		# NOTE: This will have no effect if ORTHOGONAL_PROJECTION or ODS is enabled.
 		# Recommended Range: 20.0 to 120.0
-		self.params['FIELD_OF_VIEW'] = 60.0
+		self.params['FIELD_OF_VIEW'] = 90.0
 
 		# When enabled, adds a distance-based fog to the scene
 		# NOTE: Fog strength is determined by MAX_DIST and fog color is always BACKGROUND_COLOR.
@@ -65,7 +65,7 @@ class Camera:
 
 		# The sharpness of the glow.
 		# Recommended Range: 1.0 to 100.0
-		self.params['GLOW_SHARPNESS'] = 4.0
+		self.params['GLOW_SHARPNESS'] = 10.0
 
 		# Color of the sunlight in RGB format.
 		# Recommended Range: All values between 0.0 and 1.0
@@ -140,7 +140,7 @@ class Camera:
 		self.params['SPECULAR_HIGHLIGHT'] = 40
 
 		# Determines if the sun should be drawn in the sky.
-		self.params['SUN_ENABLED'] = True
+		self.params['SUN_ENABLED'] = False
 
 		# Size of the sun to draw in the sky.
 		# NOTE: This only takes effect when SUN_ENABLED is enabled.

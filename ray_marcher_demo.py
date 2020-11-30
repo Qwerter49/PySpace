@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import pygame, sys, math, random, os
 import numpy as np
@@ -19,13 +19,13 @@ import os
 os.environ['SDL_VIDEO_CENTERED'] = '1'
 
 #Size of the window and rendering
-win_size = (1280, 720)
+win_size = (1920, 1080)
 
 #Maximum frames per second
 max_fps = 30
 
 #Forces an 'up' orientation when True, free-camera when False
-gimbal_lock = False
+gimbal_lock = True
 
 #Mouse look speed
 look_speed = 0.003
@@ -69,11 +69,50 @@ look_y = 0.0
 #
 # Set initial values of '0' through '6' below
 #----------------------------------------------
-keyvars = [1.5, 1.5, 2.0, 1.0, 1.0, 1.0]
+keyvars = [1.0, 1.0, 1.89, 1.0, 1.0, 1.0]
 
 #----------------------------------------------
 #            Fractal Examples Below
 #----------------------------------------------
+
+def dust_speck():
+	obj = Object()
+	obj.add(OrbitInitZero())
+	for _ in range(10):
+		obj.add(FoldAbs())
+		obj.add(FoldMenger())
+		obj.add(FoldScaleTranslate(3, (-3,-2,0)))
+		obj.add(FoldPlane((1,0,0), -1))
+	obj.add(Sphere(1, color=(0.8,0.8,0.5)))
+	return obj
+
+def testing():
+	obj = Object()
+	obj.add(OrbitInitInf())
+	for _ in range(20):
+		obj.add(FoldSierpinski())
+		obj.add(FoldMenger())
+		obj.add(FoldRotateY('0'))
+		obj.add(FoldAbs())
+		obj.add(FoldRotateZ('1'))
+		obj.add(FoldScaleTranslate('2', (-7.10, 0.396, -6.29)))
+		obj.add(OrbitMinAbs((1,1,1)))
+	obj.add(Box(6.0, color='orbit'))
+	return obj
+
+def testingTree():
+	obj = Object()
+	obj.add(OrbitInitInf())
+	for _ in range(30):
+		obj.add(FoldRotateY(0.44))
+		obj.add(FoldAbs())
+		obj.add(FoldMenger())
+		obj.add(OrbitMinAbs((0.24,2.28,7.6)))
+		obj.add(FoldScaleTranslate(1.3, (-2,-4.8,0)))
+		obj.add(FoldPlane((0,0,-1), 0))
+	obj.add(Box(4.8, color='orbit'))
+	return obj
+
 def infinite_spheres():
 	obj = Object()
 	obj.add(FoldRepeatX(2.0))
@@ -244,7 +283,7 @@ if __name__ == '__main__':
 	#======================================================
 	#               Change the fractal here
 	#======================================================
-	obj_render = tree_planet()
+	obj_render = test_fractal()
 	#======================================================
 
 	#======================================================
@@ -252,7 +291,7 @@ if __name__ == '__main__':
 	# See pyspace/camera.py for all camera options
 	#======================================================
 	camera = Camera()
-	camera['ANTIALIASING_SAMPLES'] = 1
+	camera['ANTIALIASING_SAMPLES'] = 2
 	camera['AMBIENT_OCCLUSION_STRENGTH'] = 0.01
 	#======================================================
 
